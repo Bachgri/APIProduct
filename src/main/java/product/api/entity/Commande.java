@@ -1,6 +1,7 @@
 package product.api.entity;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,27 +16,36 @@ import javax.persistence.OneToOne;
 @Entity
 public class Commande {
 	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Column(columnDefinition = "integer default 1")
 	private int quantite;
 	private Timestamp timestamp;
 	private String Status;
+	
 	@OneToOne(cascade = CascadeType.ALL) 
 	Client client;
+	
 	@ManyToMany(cascade = CascadeType.ALL )
-	private Set<Product> products;
+	private Set<Product> products ;
+	
+	
 	public Commande() {
 	}
+	
 	public Commande(int quantite, Timestamp timestamp, String status, Client client, Set<Product> products) {
 		super();
 		this.quantite = quantite;
 		this.timestamp = timestamp;
 		Status = status;
+		this.products = new HashSet<>();
 		this.client = client;
 		this.products = products;
 	}
+	
 	public Long getId() {
 		return id;
 	}
