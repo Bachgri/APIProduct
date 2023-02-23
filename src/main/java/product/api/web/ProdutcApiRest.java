@@ -44,6 +44,7 @@ public class ProdutcApiRest {
 	@PutMapping("/products/{id}")
 	public void put( @PathVariable("id") Long id , @RequestBody Product product) {
 		Product p = productRepo.findById(id).get();
+		System.out.println("new Product to update : ");
 		p.setDesignation(product.getDesignation());
 		p.setDiscription(product.getDiscription());
 		p.setPrice(product.getPrice());
